@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150206145600) do
+ActiveRecord::Schema.define(version: 20150211151600) do
 
   create_table "football_broadcaster_broadcasts", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "home_team_id"
+    t.integer  "guest_team_id"
+  end
+
+  add_index "football_broadcaster_broadcasts", ["guest_team_id"], name: "index_football_broadcaster_broadcasts_on_guest_team_id"
+  add_index "football_broadcaster_broadcasts", ["home_team_id"], name: "index_football_broadcaster_broadcasts_on_home_team_id"
+
+  create_table "players", force: :cascade do |t|
     t.string   "name"
+    t.string   "surname"
+    t.integer  "team_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "players", ["team_id"], name: "index_players_on_team_id"
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

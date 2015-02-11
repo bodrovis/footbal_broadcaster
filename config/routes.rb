@@ -1,5 +1,5 @@
 FootballBroadcaster::Engine.routes.draw do
-  resources :broadcasts
+  resources :broadcasts, only: [:index, :show, :new, :create]
 
   root 'broadcasts#index'
 end

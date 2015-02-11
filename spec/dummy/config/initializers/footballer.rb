@@ -1,0 +1,1 @@
+FootballBroadcaster.team_class = 'Team'

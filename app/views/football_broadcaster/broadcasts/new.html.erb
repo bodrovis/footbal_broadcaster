@@ -1,8 +1,17 @@
 <h1>New broadcast</h1>
 
 <%= form_for @broadcast do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, required: true %>
+  <%= render 'shared/errors', object: @broadcast %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, required: true %>
+
+  <%= f.label :home_team_id %>
+  <%= f.collection_select :home_team_id, FootballBroadcaster.team_class.all, :id, :title %>
+
+  <%= f.label :guest_team_id %>
+  <%= f.collection_select :guest_team_id, FootballBroadcaster.team_class.all, :id, :title %>
+
 
   <%= f.submit %>
 <% end %>
