@@ -3,12 +3,12 @@
     <label class="select optional" for="broadcast_participating_players_attributes_new_participating_players_player_id">
       Player
     </label>
-    <select class="select optional"
+    <select class="select optional select_player"
             name="broadcast[participating_players_attributes][new_participating_players][player_id]"
             id="broadcast_participating_players_attributes_new_participating_players_player_id">
       <option value="">Choose a player</option>
       {{#teams}}
-        <optgroup label="{{title}}">
+        <optgroup label="{{title}}" data-side="{{this.side}}">
           {{#players}}
             <option value="{{id}}">{{full_name}}</option>
           {{/players}}

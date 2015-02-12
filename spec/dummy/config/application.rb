@@ -7,6 +7,8 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
+require 'jquery-rails'
+require 'coffee-script' # otherwise tilt is autoloading 'coffee_script' in a non thread-safe way
 
 Bundler.require(*Rails.groups)
 require "football_broadcaster"

@@ -3,12 +3,12 @@ module FootballBroadcaster
     respond_to :json
 
     def teams_players
-      team_ids = params[:teams].to_s.split(',')
       players_hash = {teams: []}
-      team_ids.uniq.sort.each do |id|
-        team = Team.find(id.to_i)
+      %w(home guest).each do |side|
+        team = Team.find(params[side.to_sym].to_i)
         team_title = team.title.to_sym
-        players_with_team = {title: team_title, players: []}
+        players_with_team = {side: side, title: team_title, players: []}
+
         team.players.each do |player|
           players_with_team[:players] << {
               id: player.id,

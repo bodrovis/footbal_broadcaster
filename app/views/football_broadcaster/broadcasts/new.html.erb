@@ -7,10 +7,10 @@
   <%= f.text_field :title, required: true %>
 
   <%= f.label :home_team_id %>
-  <%= f.collection_select :home_team_id, FootballBroadcaster.team_class.all, :id, :title %>
+  <%= f.collection_select :home_team_id, FootballBroadcaster.team_class.all, :id, :title, prompt: 'Select a team' %>
 
   <%= f.label :guest_team_id %>
-  <%= f.collection_select :guest_team_id, FootballBroadcaster.team_class.all, :id, :title %>
+  <%= f.collection_select :guest_team_id, FootballBroadcaster.team_class.all, :id, :title, prompt: 'Select a team' %>
 
   <div id="participating_players_list">
     <%= f.fields_for :participating_players do |options_form| %>
@@ -20,18 +20,13 @@
     <div class="links">
       <%= link_to_add_association 'add player', f, :participating_players %>
     </div>
-  </div>
 
-  <% if false %>
-    <div>
-      <% Team.first.players.each do |p| %>
-        <%= check_box_tag 'broadcast[home_team_participating_players][]', p.id %>
-        <%= check_box_tag 'broadcast[home_team_participating_reserve][]', p.id %>
-        <label><%= p.name + ' ' + p.surname %></label><br/><br/>
-      <% end %>
+    <div id="teams_vs"></div>
+    <div id="teams_roster">
+      <div id="home_roster"></div>
+      <div id="guest_roster"></div>
     </div>
-  <% end %>
-
+  </div>
 
   <%= f.submit %>
 <% end %>

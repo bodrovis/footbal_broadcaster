@@ -66,6 +66,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.0)
+    database_cleaner (1.4.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.3.0)
@@ -193,6 +194,7 @@ DEPENDENCIES
   annotate
   capybara (= 2.4.4)
   coffee-rails (~> 4.1)
+  database_cleaner (~> 1.4.0)
   factory_girl_rails (= 4.5.0)
   faker
   football_broadcaster!

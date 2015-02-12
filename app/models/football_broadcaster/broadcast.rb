@@ -23,10 +23,18 @@ module FootballBroadcaster
     validates :home_team_id, presence: true
     validates :guest_team_id, presence: true
     validate :guest_team_cannot_be_same_as_home_team
+    validate :players_count
 
     def guest_team_cannot_be_same_as_home_team
       if guest_team == home_team
-        errors.add(:guest_team, 'Can\'t be the same as the home team.')
+        errors.add(:guest_team, 'can\'t be the same as the home team.')
+      end
+    end
+
+    def players_count
+      if participating_players.to_a.delete_if {|p| p.reserve? }.length < 22
+        errors.add(:guest_team, 'must have at least 11 field players.')
+        errors.add(:home_team, 'must have at least 11 field players.')
       end
     end
   end

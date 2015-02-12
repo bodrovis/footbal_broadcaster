@@ -19,6 +19,8 @@ module FootballBroadcaster
       if @broadcast.save
         flash[:success] = 'Saved!'
         redirect_to football_broadcaster.root_path
+      else
+        render 'new'
       end
     end
 
