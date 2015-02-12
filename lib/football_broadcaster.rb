@@ -1,5 +1,8 @@
 require "football_broadcaster/engine"
 
+require "cocoon"
+require "handlebars_assets"
+
 module FootballBroadcaster
   mattr_accessor :team_class
 

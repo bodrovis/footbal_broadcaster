@@ -7,3 +7,6 @@ module FootballBroadcaster
     end
   end
 end
+
+require 'simple_form'
+require 'responders'

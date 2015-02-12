@@ -1,7 +1,7 @@
 <h1>New broadcast</h1>
 
-<%= form_for @broadcast do |f| %>
-  <%= render 'shared/errors', object: @broadcast %>
+<%= simple_form_for @broadcast do |f| %>
+  <%= render 'football_broadcaster/shared/errors', object: @broadcast %>
 
   <%= f.label :title %>
   <%= f.text_field :title, required: true %>
@@ -11,6 +11,26 @@
 
   <%= f.label :guest_team_id %>
   <%= f.collection_select :guest_team_id, FootballBroadcaster.team_class.all, :id, :title %>
+
+  <div id="participating_players_list">
+    <%= f.fields_for :participating_players do |options_form| %>
+      <%= render 'participating_player_fields', f: options_form %>
+    <% end %>
+
+    <div class="links">
+      <%= link_to_add_association 'add player', f, :participating_players %>
+    </div>
+  </div>
+
+  <% if false %>
+    <div>
+      <% Team.first.players.each do |p| %>
+        <%= check_box_tag 'broadcast[home_team_participating_players][]', p.id %>
+        <%= check_box_tag 'broadcast[home_team_participating_reserve][]', p.id %>
+        <label><%= p.name + ' ' + p.surname %></label><br/><br/>
+      <% end %>
+    </div>
+  <% end %>
 
 
   <%= f.submit %>

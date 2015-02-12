@@ -1,0 +1,6 @@
+<div class="nested-fields">
+  <%= f.association :player, label_method: :full_name, collection: Player.order('team_id ASC'),
+                    prompt: 'Choose a player' %>
+  <%= f.check_box :reserve %>
+  <%= link_to_remove_association "remove player", f %>
+</div>

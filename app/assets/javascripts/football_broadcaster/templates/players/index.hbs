@@ -1,0 +1,28 @@
+<div class="nested-fields">
+  <div class="input select optional broadcast_participating_players_player">
+    <label class="select optional" for="broadcast_participating_players_attributes_new_participating_players_player_id">
+      Player
+    </label>
+    <select class="select optional"
+            name="broadcast[participating_players_attributes][new_participating_players][player_id]"
+            id="broadcast_participating_players_attributes_new_participating_players_player_id">
+      <option value="">Choose a player</option>
+      {{#teams}}
+        <optgroup label="{{title}}">
+          {{#players}}
+            <option value="{{id}}">{{full_name}}</option>
+          {{/players}}
+        </optgroup>
+      {{/teams}}
+    </select>
+  </div>
+
+  <label for="broadcast_participating_players_attributes_new_participating_players_reserve">Reserve?</label>
+  <input name="broadcast[participating_players_attributes][new_participating_players][reserve]" type="hidden" value="0" />
+
+  <input type="checkbox" value="1"
+         name="broadcast[participating_players_attributes][new_participating_players][reserve]"
+         id="broadcast_participating_players_attributes_new_participating_players_reserve" />
+
+  <a class="remove_fields dynamic" href="#">remove player</a>
+</div>

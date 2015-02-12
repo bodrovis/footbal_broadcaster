@@ -25,7 +25,8 @@ module FootballBroadcaster
     private
 
     def broadcast_params
-      params.require(:broadcast).permit(:title, :home_team_id, :guest_team_id)
+      params.require(:broadcast).permit(:title, :home_team_id, :guest_team_id,
+                                        participating_players_attributes: [:player_id, :reserve])
     end
   end
 end
