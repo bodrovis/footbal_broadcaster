@@ -55,7 +55,6 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.include CapybaraExtensions, type: :feature
-  config.include FootballBroadcaster::Engine.routes.url_helpers
 
   config.before(:all) do
     DatabaseCleaner.strategy = :truncation,
