@@ -14,8 +14,8 @@ require 'rails_helper'
 
 module FootballBroadcaster
   RSpec.describe Broadcast do
-    let!(:home_team) {FactoryGirl.create(:team)}
-    let!(:guest_team) {FactoryGirl.create(:team)}
+    let!(:home_team) {FactoryGirl.create(:team_with_players)}
+    let!(:guest_team) {FactoryGirl.create(:team_with_players)}
 
     context "validations" do
       it "should not be valid without a title, guest and home team ids" do
@@ -29,33 +29,21 @@ module FootballBroadcaster
       end
 
       it "should not be valid without 22 field players" do
-        broadcast = FactoryGirl.build_stubbed(:broadcast, home_team: home_team, guest_team: guest_team)
-        11.times do
-          FactoryGirl.create(:participating_player, broadcast: broadcast)
-        end
+        broadcast = FactoryGirl.build_stubbed(:broadcast_with_players, home_team: home_team, guest_team: guest_team,
+                                       players: home_team.players)
         expect(broadcast).not_to be_valid
       end
 
       it "should be valid with a name, two different teams and at least 22 field players" do
-        broadcast = FactoryGirl.build_stubbed(:broadcast, home_team: home_team, guest_team: guest_team)
-        22.times do
-          FactoryGirl.create(:participating_player, broadcast: broadcast)
-        end
+        broadcast = FactoryGirl.create(:broadcast_with_players, home_team: home_team, guest_team: guest_team,
+                                              players: home_team.players + guest_team.players)
         expect(broadcast).to be_valid
       end
     end
 
     context "associations" do
-      let(:broadcast) {FactoryGirl.build_stubbed(:broadcast, home_team: home_team, guest_team: guest_team)}
-      before(:each) do
-        # Each team has 2 players
-        [home_team, guest_team].each do |team|
-          2.times do
-            player = FactoryGirl.create(:player, team: team)
-            FactoryGirl.create(:participating_player, player: player, broadcast: broadcast)
-          end
-        end
-      end
+      let(:broadcast) {FactoryGirl.create(:broadcast_with_players, home_team: home_team, guest_team: guest_team,
+                                                 players: home_team.players + guest_team.players)}
 
       it "should belong to home and guest teams" do
         expect(broadcast.home_team.title).to eq(home_team.title)
@@ -63,12 +51,12 @@ module FootballBroadcaster
       end
 
       it "should allow fetching players" do
-        expect(broadcast.home_team.players.length).to eq(2)
+        expect(broadcast.home_team.players.length).to eq(11)
       end
 
       it "should allow fetching field players" do
-        # 2 teams, each has 2 players = 4 players total
-        expect(broadcast.field_players.length).to eq(4)
+        # 2 teams, each has 11 players = 22 players total
+        expect(broadcast.field_players.length).to eq(22)
       end
     end
   end

@@ -17,7 +17,7 @@ module FootballBroadcaster
     has_many :participating_players, class_name: 'FootballBroadcaster::ParticipatingPlayer', foreign_key: :broadcast_id
     has_many :field_players, through: :participating_players, source: :player
 
-    accepts_nested_attributes_for :participating_players#, :reject_if => :all_blank, :allow_destroy => true
+    accepts_nested_attributes_for :participating_players
 
     validates :title, presence: true
     validates :home_team_id, presence: true
