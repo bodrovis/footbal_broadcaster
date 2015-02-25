@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'pry-rails'
+
 module FootballBroadcaster
   RSpec.describe ApiController, type: :controller do
     routes { FootballBroadcaster::Engine.routes }
