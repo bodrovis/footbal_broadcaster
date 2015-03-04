@@ -1,6 +1,10 @@
-<h1>Broadcasts</h1>
+<div class="page-header">
+  <h1>Broadcasts</h1>
+</div>
 
-<%= link_to 'New broadcast', new_broadcast_path %>
+<%= link_to 'New broadcast', new_broadcast_path, class: 'btn btn-primary' %>
+
+<h2>Ongoing broadcasts</h2>
 
 <ul id="broadcasts">
   <% @broadcasts.each do |broadcast| %>

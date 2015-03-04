@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211165429) do
+ActiveRecord::Schema.define(version: 20150304162323) do
 
   create_table "football_broadcaster_broadcasts", force: :cascade do |t|
     t.string   "title"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20150211165429) do
 
   add_index "football_broadcaster_broadcasts", ["guest_team_id"], name: "index_football_broadcaster_broadcasts_on_guest_team_id"
   add_index "football_broadcaster_broadcasts", ["home_team_id"], name: "index_football_broadcaster_broadcasts_on_home_team_id"
+
+  create_table "football_broadcaster_log_messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "minutes"
+    t.integer  "seconds"
+    t.integer  "broadcast_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "football_broadcaster_log_messages", ["broadcast_id"], name: "index_football_broadcaster_log_messages_on_broadcast_id"
 
   create_table "football_broadcaster_participating_players", force: :cascade do |t|
     t.integer  "broadcast_id"

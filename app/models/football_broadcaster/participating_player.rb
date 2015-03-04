@@ -13,6 +13,6 @@
 module FootballBroadcaster
   class ParticipatingPlayer < ActiveRecord::Base
     belongs_to :broadcast, class_name: 'FootballBroadcaster::Broadcast'
-    belongs_to :player, class_name: 'Player'
+    belongs_to :player, class_name: FootballBroadcaster.player_class.to_s
   end
 end

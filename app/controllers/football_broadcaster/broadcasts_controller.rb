@@ -7,7 +7,8 @@ module FootballBroadcaster
     end
 
     def show
-      @broadcast = FootballBroadcaster::Broadcast.find(params[:id])
+      @broadcast = FootballBroadcaster::Broadcast.includes(:field_players, :log_messages).find(params[:id])
+      @field_players = @broadcast.field_players.group_by(&FootballBroadcaster.team_class.name.downcase.to_sym)
     end
 
     def new
@@ -22,6 +23,11 @@ module FootballBroadcaster
       else
         render 'new'
       end
+    end
+
+    def edit
+      @broadcast = FootballBroadcaster::Broadcast.includes(:log_messages).find(params[:id])
+      @log_message = @broadcast.log_messages.build
     end
 
     private

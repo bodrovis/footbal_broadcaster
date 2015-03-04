@@ -2,5 +2,24 @@
   <%= @broadcast.home_team.title %> vs <%= @broadcast.guest_team.title %>
 </h1>
 
-<%# @broadcast.home_team.players.inspect %>
-<%= @broadcast.field_players.inspect %>
+<h2><%= @broadcast.home_team.title %> roster:</h2>
+
+<ul>
+  <% @field_players[@broadcast.home_team].each do |player| %>
+    <li><%= player.full_name %></li>
+  <% end %>
+</ul>
+
+<h2><%= @broadcast.guest_team.title %> roster:</h2>
+
+<ul>
+  <% @field_players[@broadcast.guest_team].each do |player| %>
+    <li><%= player.full_name %></li>
+  <% end %>
+</ul>
+
+<h2>Log</h2>
+
+<% @broadcast.log_messages.each do |message| %>
+  <%= message.body %>
+<% end %>

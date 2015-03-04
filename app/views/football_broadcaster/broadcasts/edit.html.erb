@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>Manage broadcast</h1>
+</div>
+
+<h2>What's happening?</h2>
+
+<%= simple_form_for @log_message do |f| %>
+  <%= f.input :broadcast_id, as: :hidden %>
+
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, required: true, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :minutes %>
+    <%= f.number_field :minutes, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :seconds %>
+    <%= f.number_field :seconds, class: 'form-control' %>
+  </div>
+
+  <%= f.submit 'Add', class: 'btn btn-primary' %>
+<% end %>
+
+<div class="panel">
+  <div class="panel-heading">Log</div>
+  <% if @broadcast.log_messages.any? %>
+    <div class="panel-body">
+      <ul>
+        <% @broadcast.log_messages.each do |message| %>
+          <li>
+            <span class="text-muted"><%= message.match_time %></span>
+            <%= message.body %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

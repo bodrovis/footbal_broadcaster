@@ -16,6 +16,7 @@ module FootballBroadcaster
     belongs_to :guest_team, class_name: FootballBroadcaster.team_class.to_s
     has_many :participating_players, class_name: 'FootballBroadcaster::ParticipatingPlayer', foreign_key: :broadcast_id
     has_many :field_players, through: :participating_players, source: :player
+    has_many :log_messages, class_name: 'FootballBroadcaster::LogMessage'
 
     accepts_nested_attributes_for :participating_players
 
@@ -32,9 +33,9 @@ module FootballBroadcaster
     end
 
     def players_count
-      if participating_players.to_a.delete_if {|p| p.reserve? }.length < 22
-        errors.add(:guest_team, 'must have at least 11 field players.')
-        errors.add(:home_team, 'must have at least 11 field players.')
+      if participating_players.to_a.delete_if {|p| p.reserve? }.length != 22
+        errors.add(:guest_team, 'must have 11 field players.')
+        errors.add(:home_team, 'must have 11 field players.')
       end
     end
   end

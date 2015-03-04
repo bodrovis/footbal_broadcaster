@@ -1,16 +1,24 @@
-<h1>New broadcast</h1>
+<div class="page-header">
+  <h1>New broadcast</h1>
+</div>
 
 <%= simple_form_for @broadcast do |f| %>
   <%= render 'football_broadcaster/shared/errors', object: @broadcast %>
 
-  <%= f.label :title %>
-  <%= f.text_field :title, required: true %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%= f.text_field :title, required: true, class: 'form-control' %>
+  </div>
 
-  <%= f.label :home_team_id %>
-  <%= f.collection_select :home_team_id, FootballBroadcaster.team_class.all, :id, :title, prompt: 'Select a team' %>
+  <div class="form-group">
+    <%= f.label :home_team_id %>
+    <%= f.collection_select :home_team_id, FootballBroadcaster.team_class.all, :id, :title, prompt: 'Select a team' %>
+  </div>
 
-  <%= f.label :guest_team_id %>
-  <%= f.collection_select :guest_team_id, FootballBroadcaster.team_class.all, :id, :title, prompt: 'Select a team' %>
+  <div class="form-group">
+    <%= f.label :guest_team_id %>
+    <%= f.collection_select :guest_team_id, FootballBroadcaster.team_class.all, :id, :title, prompt: 'Select a team' %>
+  </div>
 
   <div id="participating_players_list">
     <%= f.fields_for :participating_players do |options_form| %>
@@ -18,15 +26,17 @@
     <% end %>
 
     <div class="links">
-      <%= link_to_add_association 'add player', f, :participating_players %>
+      <%= link_to_add_association 'add player', f, :participating_players,
+                                  class: 'btn btn-default btn-sm' %>
     </div>
 
     <div id="teams_vs"></div>
     <div id="teams_roster">
       <div id="home_roster"></div>
+      <hr>
       <div id="guest_roster"></div>
     </div>
   </div>
 
-  <%= f.submit %>
+  <%= f.submit 'Create broadcast', class: 'btn btn-primary' %>
 <% end %>
