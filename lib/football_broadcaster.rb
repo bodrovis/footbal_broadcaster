@@ -1,6 +1,8 @@
 require "football_broadcaster/engine"
 
+require 'sass'
 require "cocoon"
+require 'bootstrap-sass'
 require "handlebars_assets"
 
 module FootballBroadcaster

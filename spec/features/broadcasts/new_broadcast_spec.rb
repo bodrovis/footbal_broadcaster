@@ -18,7 +18,7 @@ RSpec.describe "New broadcast", js: true do
           select p.full_name, from: 'Player'
         end
       end
-      click_button 'Create Broadcast'
+      click_button 'Create broadcast'
     end
     flash_message :success, 'Saved!'
     within '#broadcasts' do
