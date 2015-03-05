@@ -32,11 +32,12 @@
     <div class="panel-body">
       <ul>
         <% @broadcast.log_messages.each do |message| %>
-          <li>
-            <%= message.inspect %>
-            <span class="text-muted"><%= message.match_time %></span>
-            <%= message.body %>
-          </li>
+          <% if message.persisted? %>
+            <li>
+              <span class="text-muted"><%= message.match_time %></span>
+              <%= message.body %>
+            </li>
+          <% end %>
         <% end %>
       </ul>
     </div>

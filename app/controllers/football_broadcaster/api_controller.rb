@@ -2,6 +2,10 @@ module FootballBroadcaster
   class ApiController < ApplicationController
     respond_to :json
 
+    def log_for_broadcast
+
+    end
+
     def teams_players
       @players_hash = {teams: []}
       %w(home guest).each do |side|
