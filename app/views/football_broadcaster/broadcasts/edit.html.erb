@@ -5,6 +5,7 @@
 <h2>What's happening?</h2>
 
 <%= simple_form_for @log_message do |f| %>
+  <%= render 'football_broadcaster/shared/errors', object: @log_message %>
   <%= f.input :broadcast_id, as: :hidden %>
 
   <div class="form-group">
@@ -32,6 +33,7 @@
       <ul>
         <% @broadcast.log_messages.each do |message| %>
           <li>
+            <%= message.inspect %>
             <span class="text-muted"><%= message.match_time %></span>
             <%= message.body %>
           </li>

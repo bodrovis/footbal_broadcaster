@@ -4,8 +4,12 @@ module FootballBroadcaster
   class LogMessagesController < ApplicationController
     def create
       @log_message = FootballBroadcaster::LogMessage.new(log_message_params)
-      @log_message.save
-      redirect_to edit_broadcast_path(@log_message.broadcast)
+      if @log_message.save
+        redirect_to edit_broadcast_path(@log_message.broadcast)
+      else
+        @broadcast = FootballBroadcaster::Broadcast.includes(:log_messages).find(@log_message.broadcast_id)
+        render 'football_broadcaster/broadcasts/edit'
+      end
     end
 
     private
