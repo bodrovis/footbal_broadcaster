@@ -2,7 +2,7 @@
   <h1>New broadcast</h1>
 </div>
 
-<%= simple_form_for @broadcast do |f| %>
+<%= simple_form_for @broadcast, remote: true do |f| %>
   <%= render 'football_broadcaster/shared/errors', object: @broadcast %>
 
   <div class="form-group">

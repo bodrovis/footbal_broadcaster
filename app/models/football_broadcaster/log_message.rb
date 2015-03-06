@@ -20,7 +20,7 @@ module FootballBroadcaster
     validates :body, presence: true
 
     # Minutes and seconds are optional
-    # But if one of those are present
+    # But if one of those is present
     # the other should be present as well
     validates :minutes, presence: true,
               numericality: { only_integer: true, greater_than_or_equal_to: 0 },

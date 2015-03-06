@@ -16,12 +16,10 @@ module FootballBroadcaster
     end
 
     def create
-      @broadcast = FootballBroadcaster::Broadcast.new(broadcast_params)
-      if @broadcast.save
-        flash[:success] = 'Saved!'
-        redirect_to football_broadcaster.root_path
-      else
-        render 'new'
+      respond_to do |format|
+        @broadcast = FootballBroadcaster::Broadcast.new(broadcast_params)
+        @broadcast.save
+        format.js
       end
     end
 

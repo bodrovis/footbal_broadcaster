@@ -1,0 +1,6 @@
+<% if @broadcast.errors.any? %>
+$('#new_broadcast').prepend('<%= j render 'football_broadcaster/shared/errors', object: @broadcast %>');
+<% else %>
+<% flash[:success] = 'Saved!' %>
+window.location.href = '<%= football_broadcaster.root_path %>';
+<% end %>

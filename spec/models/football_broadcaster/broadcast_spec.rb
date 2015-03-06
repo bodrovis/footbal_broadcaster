@@ -34,6 +34,12 @@ module FootballBroadcaster
         expect(broadcast).not_to be_valid
       end
 
+      it "should not be valid with 11 field and 11 reserve players" do
+        broadcast = FactoryGirl.build_stubbed(:broadcast_with_players, home_team: home_team, guest_team: guest_team,
+                                              players: home_team.players, reserves: guest_team.players)
+        expect(broadcast).not_to be_valid
+      end
+
       it "should be valid with a name, two different teams and at least 22 field players" do
         broadcast = FactoryGirl.create(:broadcast_with_players, home_team: home_team, guest_team: guest_team,
                                               players: home_team.players + guest_team.players)

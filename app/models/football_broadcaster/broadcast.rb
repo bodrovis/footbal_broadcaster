@@ -26,6 +26,8 @@ module FootballBroadcaster
     validate :guest_team_cannot_be_same_as_home_team
     validate :players_count
 
+    private
+
     def guest_team_cannot_be_same_as_home_team
       if guest_team == home_team
         errors.add(:guest_team, 'can\'t be the same as the home team.')
@@ -33,8 +35,19 @@ module FootballBroadcaster
     end
 
     def players_count
-      if participating_players.to_a.delete_if {|p| p.reserve? }.length != 22
+      # Delete all reserve players and players from teams that are not participating
+      # Then check that guest and home both have 11 field (not reserve players)
+      players = participating_players.to_a.delete_if {|p| p.reserve? }.map {
+          |p_player| p_player.player
+      }.delete_if {
+          |player| player.team_id != guest_team_id && player.team_id != home_team_id
+      }
+
+      if players.reject {|player| player.team_id == home_team_id }.length != 11
         errors.add(:guest_team, 'must have 11 field players.')
+      end
+
+      if players.reject {|player| player.team_id == guest_team_id }.length != 11
         errors.add(:home_team, 'must have 11 field players.')
       end
     end
