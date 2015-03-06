@@ -27,7 +27,7 @@ module FootballBroadcaster
               if: Proc.new {|log| log.seconds.present?}
     validates :seconds, presence: true,
               numericality: { only_integer: true, greater_than_or_equal_to: 0,
-                              less_than_or_equal_to: 60 },
+                              less_than: 60 },
               if: Proc.new {|log| log.minutes.present?}
 
     def match_time

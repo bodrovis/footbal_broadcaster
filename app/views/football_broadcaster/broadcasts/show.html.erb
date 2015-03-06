@@ -18,8 +18,18 @@
   <% end %>
 </ul>
 
-<h2>Log</h2>
+<p><span class="btn btn-info btn-lg" id="update_log">Update log</span></p>
 
-<% @broadcast.log_messages.each do |message| %>
-  <%= message.body %>
-<% end %>
+<div class="panel panel-info" id="broadcast_log" data-broadcast="<%= @broadcast.id %>">
+  <div class="panel-heading">Log</div>
+  <div class="panel-body">
+    <ul>
+      <% @broadcast.log_messages.each do |message| %>
+        <li data-id="<%= message.id %>">
+          <span class="text-muted"><%= message.match_time %></span>
+          <%= message.body %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
